@@ -15,10 +15,18 @@ def canUnlockAll(boxes):
     """
 
     i = 0
-    unlocked = [boxes[0]]
+    unlocked = []
+
+    if boxes:
+        unlocked.append(boxes[0])
+    else:
+        return False
 
     def unlock(boxes, box, unlocked):
         for key in box:
+            if key >= len(boxes):
+                continue
+
             if boxes[key] or not boxes[key]:
                 if boxes[key] not in unlocked:
                     unlocked.append(boxes[key])
