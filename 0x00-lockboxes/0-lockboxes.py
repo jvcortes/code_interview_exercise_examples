@@ -28,7 +28,7 @@ def canUnlockAll(boxes):
                 continue
 
             if boxes[key] or not boxes[key]:
-                if boxes[key] not in unlocked:
+                if unlocked.count(boxes[key]) < boxes.count(boxes[key]):
                     unlocked.append(boxes[key])
                 else:
                     continue
