@@ -19,28 +19,27 @@ def canUnlockAll(boxes):
     keys = []
 
     if boxes:
+        boxes = list(enumerate(boxes))
         unlocked.append(boxes[i])
     else:
         return False
 
     while len(boxes) != len(unlocked):
         box = unlocked[i]
-        if (set(box).issubset(set(keys)) or
-                (len(box) == 1 and
-                 box[0] < len(boxes) and
-                 box == boxes[box[0]])):
+        if set(box[1]).issubset(set(keys)):
             if i == len(unlocked) - 1:
                 break
             else:
                 i += 1
                 continue
-
-        for key in box:
-            if key in keys:
-                continue
+        for key in box[1]:
             if key >= len(boxes):
                 continue
-            if boxes[key] or not boxes[key]:
+            if box == boxes[key]:
+                continue
+            if key in keys:
+                continue
+            if boxes[key]:
                 unlocked.append(boxes[key])
                 keys.append(key)
 
