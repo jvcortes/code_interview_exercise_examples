@@ -16,7 +16,7 @@ def canUnlockAll(boxes):
 
     i = 0
     unlocked = []
-    keys = []
+    keys = [0]
 
     if boxes:
         boxes = list(enumerate(boxes))
