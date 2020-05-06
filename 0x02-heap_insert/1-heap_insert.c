@@ -17,6 +17,8 @@ heap_t *heap_insert(heap_t **root, int value)
 	if (*root == NULL)
 	{
 		node = binary_tree_node(NULL, value);
+		if (node == NULL)
+			return (NULL);
 		*root = node;
 	}
 	else
@@ -99,7 +101,8 @@ heap_t *get_insertion_node(binary_tree_t *tree)
  * @node: provided node.
  * @level: level of the heap.
  *
- * Return: pointer to the newly generated node.
+ * Return: pointer to the newly generated node, if the new node generation
+ * fails the function will return a null pointer.
  */
 heap_t *visit_node(binary_tree_t *node, int level)
 {
@@ -110,7 +113,11 @@ heap_t *visit_node(binary_tree_t *node, int level)
 		if (node->left == NULL)
 		{
 			node->left = binary_tree_node(node, 0);
+			if (node->left == NULL)
+				return (NULL);
 			return (node->left);
+			if (node->right == NULL)
+				return (NULL);
 		}
 		else if (node->right == NULL)
 		{
