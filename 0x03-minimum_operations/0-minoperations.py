@@ -22,7 +22,7 @@ def minOperations(n):
     paste = 0
     copy_all = 0
 
-    if n in (0, 1):
+    if n in (0, 1) or n < 0:
         return 0
 
     m = n
