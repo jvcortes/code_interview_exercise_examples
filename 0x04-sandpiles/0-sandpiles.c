@@ -92,9 +92,9 @@ void topple(int grid[3][3])
 	{
 		for (j = 0; j < 3; j++)
 		{
-			if (grid1[i][j] >= 4)
+			if (grid[i][j] >= 4)
 			{
-				grid1[i][j] -= 4;
+				grid[i][j] -= 4;
 				if (j - 1 >= 0)
 					residue[i][j - 1]++;
 				if (j + 1 < 3)
@@ -109,5 +109,5 @@ void topple(int grid[3][3])
 
 	for (i = 0; i < 3; i++)
 		for (j = 0; j < 3; j++)
-			grid1[i][j] += residue[i][j];
+			grid[i][j] += residue[i][j];
 }
