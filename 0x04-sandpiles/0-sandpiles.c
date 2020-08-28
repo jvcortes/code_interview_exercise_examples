@@ -38,14 +38,16 @@ static void print_grid(int grid[3][3])
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 	int i, j;
-	int result[3][3];
 
 	for (i = 0; i < 3; i++)
 		for (j = 0; j < 3; j++)
-			result[i][j] = grid1[i][j] + grid2[i][j];
-	printf("=\n");
-	print_grid(result);
-	topple(result, 1, 1, 1);
+			grid1[i][j] += grid2[i][j];
+	if (is_unstable(grid1))
+	{
+		printf("=\n");
+		print_grid(grid1);
+		topple(grid1, 1, 1, 1);
+	}
 }
 
 /**
@@ -109,10 +111,11 @@ void topple(int grid[3][3], int x, int y, int center)
 		topple(grid, x + 1, y - 1, 0);
 		topple(grid, x + 1, y + 1, 0);
 
-		printf("=\n");
-		print_grid(grid);
-
 		if (is_unstable(grid))
+		{
+			printf("=\n");
+			print_grid(grid);
 			topple(grid, 1, 1, 1);
+		}
 	}
 }
