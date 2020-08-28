@@ -45,7 +45,7 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 			result[i][j] = grid1[i][j] + grid2[i][j];
 	printf("=\n");
 	print_grid(result);
-	top(result, 1, 1, 1);
+	topple(result, 1, 1, 1);
 }
 
 /**
@@ -99,20 +99,20 @@ void topple(int grid[3][3], int x, int y, int center)
 
 	if (center)
 	{
-		top(grid, x - 1, y, 0);
-		top(grid, x + 1, y, 0);
-		top(grid, x, y - 1, 0);
-		top(grid, x, y + 1, 0);
+		topple(grid, x - 1, y, 0);
+		topple(grid, x + 1, y, 0);
+		topple(grid, x, y - 1, 0);
+		topple(grid, x, y + 1, 0);
 
-		top(grid, x - 1, y - 1, 0);
-		top(grid, x - 1, y + 1, 0);
-		top(grid, x + 1, y - 1, 0);
-		top(grid, x + 1, y + 1, 0);
+		topple(grid, x - 1, y - 1, 0);
+		topple(grid, x - 1, y + 1, 0);
+		topple(grid, x + 1, y - 1, 0);
+		topple(grid, x + 1, y + 1, 0);
 
 		printf("=\n");
 		print_grid(grid);
 
 		if (is_unstable(grid))
-			top(grid, 1, 1, 1);
+			topple(grid, 1, 1, 1);
 	}
 }
