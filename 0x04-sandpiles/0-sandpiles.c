@@ -43,7 +43,8 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		for (j = 0; j < 3; j++)
 			grid1[i][j] += grid2[i][j];
 
-	while (is_unstable(grid1)) {
+	while (is_unstable(grid1))
+	{
 		printf("=\n");
 		print_grid(grid1);
 		topple(grid1);
@@ -73,16 +74,12 @@ int is_unstable(int grid[3][3])
 
 
 /**
- * topple - topples a 3x3 unstable sandpile at position x, y
+ * topple - topples a 3x3 unstable sandpile
  * @grid: grid to topple
- * @x: horizontal position in the grid
- * @y: vertical position in the grid
- * @center: start from the center of the grid, if set as a non-zero value,
- * it will call itself on its adjacent positions.
  *
  * Return: nothing.
  */
-void topple(int grid1[3][3])
+void topple(int grid[3][3])
 {
 	int i, j;
 	int residue[3][3] = {
