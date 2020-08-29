@@ -14,7 +14,10 @@
  */
 int is_palindrome(listint_t **head)
 {
-	return (check(*head, *head));
+	if (*head && head)
+		return (check(*head, *head));
+	else
+		return 1;
 }
 
 /**
