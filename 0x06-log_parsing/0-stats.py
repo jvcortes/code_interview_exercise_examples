@@ -42,7 +42,7 @@ def get_info_from_line(line, info):
 
 def print_info(info):
     print("File size: {}".format(info["total_size"]))
-    for key in info["status"]:
+    for key in sorted(info["status"]):
         print("{}: {}".format(key, info["status"][key]))
 
 
