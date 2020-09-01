@@ -25,7 +25,7 @@ def parse():
         count += 1
         get_info_from_line(line, parse.info)
 
-        if count == 9:
+        if count == 10:
             print_info(parse.info)
             count = 0
 
