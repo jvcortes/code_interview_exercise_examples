@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-import re
-import signal
-import sys
-
 """
 Parses a web server log file, every line should be in the following format:
 
@@ -12,6 +8,9 @@ Parses a web server log file, every line should be in the following format:
 Every 10 lines, the size of the read contents and the count for every found
 status code will be printed to the standard output.
 """
+import re
+import signal
+import sys
 
 
 def parse():
