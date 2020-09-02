@@ -8,26 +8,19 @@ Parses a web server log file, every line should be in the following format:
 Every 10 lines, the size of the read contents and the count for every found
 status code will be printed to the standard output.
 """
-import re
 import sys
 
 
 def get_info_from_line(line, info):
-    status_match = re.search(r".*\s(\d*)\s\d*$", line)
-
-    if status_match:
-        status = status_match.group(1)
-    else:
+    splitted = line.split()[::-1]
+    if len(splitted) < 3:
         return False
 
+    status = splitted[1]
     if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
         return False
 
-    filesize_match = re.search(r".*\s\d*\s(\d*)$", line)
-    if filesize_match:
-        filesize = filesize_match.group(1)
-    else:
-        return False
+    filesize = splitted[0]
 
     if status in info["status"]:
         info["status"][status] += 1
