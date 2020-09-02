@@ -14,17 +14,22 @@ import sys
 
 
 def get_info_from_line(line, info):
-    status_match = re.search(r"\".*\"\W([0-9]*).*$", line)
+    status_match = re.search(r"(.*?\s)?(\d*)\s\d*$", line)
 
     if status_match:
-        status = status_match.group(1)
+        status = status_match.group(2)
     else:
         return
 
     if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
         return
 
-    filesize = re.search(r"\".*\"\W[0-9]*\W([0-9]*)$", line).group(1)
+    filesize_match = re.search(r"(.*?\s)?\d*\s(\d*)$", line)
+    if filesize_match:
+        filesize = filesize_match.group(2)
+    else:
+        return
+
     if status in info["status"]:
         info["status"][status] += 1
     else:
@@ -41,9 +46,9 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            if len(line.split()) > 2:
+            if line != "\n":
                 count += 1
-                get_info_from_line(line, info)
+                get_info_from_line(line.rstrip('\n'), info)
 
             if count == 10:
                 print("File size: {}".format(info["total_size"]))
