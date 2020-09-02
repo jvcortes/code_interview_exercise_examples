@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            if get_info_from_line(line, info) == True:
+            if get_info_from_line(line, info) is not False:
                 count += 1
 
             if count == 10:
