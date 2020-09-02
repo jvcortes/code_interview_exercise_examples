@@ -15,6 +15,9 @@ import sys
 
 def get_info_from_line(line, info):
     status = re.search(r"\".*\"\W([0-9]*).*$", line).group(1)
+    if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
+        return
+
     filesize = re.search(r"\".*\"\W[0-9]*\W([0-9]*)$", line).group(1)
     if status in info["status"]:
         info["status"][status] += 1
@@ -47,4 +50,3 @@ if __name__ == "__main__":
         print("File size: {}".format(info["total_size"]))
         for key in sorted(info["status"]):
             print("{}: {}".format(key, info["status"][key]))
-
