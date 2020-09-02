@@ -17,15 +17,13 @@ def get_info_from_line(line, info):
         return False
 
     status = splitted[1]
-    if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
-        return
+    if status in ("200", "301", "400", "401", "403", "404", "405", "500"):
+        if status in info["status"]:
+            info["status"][status] += 1
+        else:
+            info["status"][status] = 1
 
     filesize = splitted[0]
-
-    if status in info["status"]:
-        info["status"][status] += 1
-    else:
-        info["status"][status] = 1
     info["total_size"] += int(filesize)
 
     return True
