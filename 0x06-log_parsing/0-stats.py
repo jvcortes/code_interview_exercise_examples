@@ -13,19 +13,19 @@ import sys
 
 
 def get_info_from_line(line, info):
-    status_match = re.search(r"(.*?\s)?(\d*)\s\d*$", line)
+    status_match = re.search(r".*\s(\d*)\s\d*$", line)
 
     if status_match:
-        status = status_match.group(2)
+        status = status_match.group(1)
     else:
         return False
 
     if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
         return False
 
-    filesize_match = re.search(r"(.*?\s)?\d*\s(\d*)$", line)
+    filesize_match = re.search(r".*\s\d*\s(\d*)$", line)
     if filesize_match:
-        filesize = filesize_match.group(2)
+        filesize = filesize_match.group(1)
     else:
         return False
 
