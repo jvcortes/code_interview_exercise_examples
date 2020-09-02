@@ -18,7 +18,7 @@ def get_info_from_line(line, info):
 
     status = splitted[1]
     if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
-        return False
+        return
 
     filesize = splitted[0]
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            if get_info_from_line(line.rstrip('\n'), info):
+            if get_info_from_line(line, info) == True:
                 count += 1
 
             if count == 10:
