@@ -46,8 +46,9 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            get_info_from_line(line.rstrip('\n'), info)
-            count += 1
+            if len(line.split()) > 2:
+                get_info_from_line(line.rstrip('\n'), info)
+                count += 1
 
             if count == 10:
                 print("File size: {}".format(info["total_size"]))
