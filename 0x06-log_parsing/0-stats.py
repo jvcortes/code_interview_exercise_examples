@@ -14,7 +14,13 @@ import sys
 
 
 def get_info_from_line(line, info):
-    status = re.search(r"\".*\"\W([0-9]*).*$", line).group(1)
+    status_match = re.search(r"\".*\"\W([0-9]*).*$", line)
+
+    if status_match:
+        status = status_match.group(1)
+    else:
+        return
+
     if status not in ("200", "301", "400", "401", "403", "404", "405", "500"):
         return
 
@@ -35,16 +41,16 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            if line != "":
-                count += 1
+            if line != "\n":
                 get_info_from_line(line, info)
 
+            count += 1
             if count == 10:
                 print("File size: {}".format(info["total_size"]))
                 for key in sorted(info["status"]):
                     print("{}: {}".format(key, info["status"][key]))
-                    count = 0
-    except Exception:
+                count = 0
+    except KeyboardInterrupt:
         pass
     finally:
         print("File size: {}".format(info["total_size"]))
