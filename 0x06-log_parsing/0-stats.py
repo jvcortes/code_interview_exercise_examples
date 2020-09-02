@@ -13,32 +13,6 @@ import signal
 import sys
 
 
-def parse():
-    count = 0
-    info = {
-        "status": {},
-        "total_size": 0
-    }
-
-    try:
-        while True:
-            line = input()
-            count += 1
-            get_info_from_line(line, info)
-
-            if count == 10:
-                print("File size: {}".format(info["total_size"]))
-                for key in sorted(info["status"]):
-                    print("{}: {}".format(key, info["status"][key]))
-                    count = 0
-    except KeyboardInterrupt:
-        pass
-    finally:
-        print("File size: {}".format(info["total_size"]))
-        for key in sorted(info["status"]):
-            print("{}: {}".format(key, info["status"][key]))
-
-
 def get_info_from_line(line, info):
     status = re.search(r"\".*\"\W([0-9]*).*$", line).group(1)
     filesize = re.search(r"\".*\"\W[0-9]*\W([0-9]*)$", line).group(1)
@@ -50,4 +24,27 @@ def get_info_from_line(line, info):
 
 
 if __name__ == "__main__":
-    parse()
+    count = 0
+    info = {
+        "status": {},
+        "total_size": 0
+    }
+
+    try:
+        for line in sys.stdin:
+            if line != "":
+                count += 1
+                get_info_from_line(line, info)
+
+            if count == 10:
+                print("File size: {}".format(info["total_size"]))
+                for key in sorted(info["status"]):
+                    print("{}: {}".format(key, info["status"][key]))
+                    count = 0
+    except Exception:
+        pass
+    finally:
+        print("File size: {}".format(info["total_size"]))
+        for key in sorted(info["status"]):
+            print("{}: {}".format(key, info["status"][key]))
+
