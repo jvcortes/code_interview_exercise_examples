@@ -54,7 +54,7 @@ if __name__ == "__main__":
                 for key in sorted(info["status"]):
                     print("{}: {}".format(key, info["status"][key]))
                 count = 0
-    except KeyboardInterrupt:
+    except Exception:
         pass
     finally:
         print("File size: {}".format(info["total_size"]))
