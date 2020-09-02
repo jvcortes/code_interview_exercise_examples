@@ -41,10 +41,10 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            if line != "\n":
+            if len(line.split()) > 2:
+                count += 1
                 get_info_from_line(line, info)
 
-            count += 1
             if count == 10:
                 print("File size: {}".format(info["total_size"]))
                 for key in sorted(info["status"]):
