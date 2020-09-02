@@ -15,19 +15,28 @@ import sys
 
 def parse():
     count = 0
-    parse.info = {
+    info = {
         "status": {},
         "total_size": 0
     }
 
-    while True:
-        line = input()
-        count += 1
-        get_info_from_line(line, parse.info)
+    try:
+        while True:
+            line = input()
+            count += 1
+            get_info_from_line(line, info)
 
-        if count == 10:
-            print_info(parse.info)
-            count = 0
+            if count == 10:
+                print("File size: {}".format(info["total_size"]))
+                for key in sorted(info["status"]):
+                    print("{}: {}".format(key, info["status"][key]))
+                    count = 0
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print("File size: {}".format(info["total_size"]))
+        for key in sorted(info["status"]):
+            print("{}: {}".format(key, info["status"][key]))
 
 
 def get_info_from_line(line, info):
@@ -40,17 +49,5 @@ def get_info_from_line(line, info):
     info["total_size"] += int(filesize)
 
 
-def print_info(info):
-    print("File size: {}".format(info["total_size"]))
-    for key in sorted(info["status"]):
-        print("{}: {}".format(key, info["status"][key]))
-
-
-def handle_sigint(signal, frame):
-    print_info(parse.info)
-    exit(0)
-
-
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, handle_sigint)
     parse()
