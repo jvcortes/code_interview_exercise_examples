@@ -20,12 +20,19 @@ int check_cycle(listint_t *head)
 
 	slow = fast = head;
 
-	do {
+	while (slow != fast) {
 		slow = slow->next;
-		fast = fast->next->next;
-		if (!slow || !fast)
+		if (!slow)
 			return (0);
-	} while (slow != fast);
+
+		fast = fast->next;
+		if (!fast)
+			return (0);
+
+		fast = fast->next;
+		if (!fast)
+			return (0);
+	}
 
 	return (1);
 }
