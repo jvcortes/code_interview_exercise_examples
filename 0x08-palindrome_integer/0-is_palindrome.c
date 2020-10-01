@@ -15,8 +15,6 @@ int is_palindrome(unsigned long n)
 	int start = digit_at(n, 1), end = digit_at(n, len), c = 1, cr = len;
 
 	while (c <= len) {
-		printf("%d\n", start);
-		printf("%d\n", end);
 		if (start != end)
 		{
 			return (0);
