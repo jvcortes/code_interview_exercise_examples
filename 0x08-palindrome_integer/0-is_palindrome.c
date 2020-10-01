@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "palindrome.h"
 
 int length(unsigned long n);
@@ -14,6 +15,8 @@ int is_palindrome(unsigned long n)
 	int start = digit_at(n, 1), end = digit_at(n, len), c = 1, cr = len;
 
 	while (c <= len) {
+		printf("%d\n", start);
+		printf("%d\n", end);
 		if (start != end)
 		{
 			return (0);
@@ -36,15 +39,14 @@ int is_palindrome(unsigned long n)
  */
 unsigned long power(unsigned long base, unsigned int exponent)
 {
-	int count, result;
+	int count;
+	long result;
 
 	if (exponent == 0)
 		return (1);
 	result = 1;
 	for (count = 0; count < (int)exponent; count++)
-	{
 		result *= base;
-	}
 	return (result);
 }
 
