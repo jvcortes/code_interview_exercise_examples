@@ -1,8 +1,8 @@
-#include <stdio.h>
 #include "palindrome.h"
 
-int length(char *s);
-int assert(char *s, char *e, int len);
+int length(unsigned long n);
+int digit_at(unsigned long n, int pos);
+int assert(int n, int s, int e, int len);
 /**
  * is_palindrome - determines if a provided string is a palindrome
  * @s: provided string
@@ -10,27 +10,57 @@ int assert(char *s, char *e, int len);
  */
 int is_palindrome(unsigned long n)
 {
-	char buf[256];
-	sprintf(buf, "%ld", n);
+	int len = length(n);
+	int start = digit_at(n, 1), end = digit_at(n, len), c = 1, cr = len;
 
-	return (assert(buf, buf + (length(buf) - 1), length(buf)));
+	while (c <= len) {
+		if (start != end)
+		{
+			return (0);
+		}
+		else
+		{
+			start = digit_at(n, ++c);
+			end = digit_at(n, --cr);
+		}
+	}
+
+	return (1);
 }
 
 /**
- * assert - recursively asserts if a string is a palindrome
- * @s: provided pointer to the start of the string
- * @e: provided pointer to the end of the string
- * @len: length of the string
- * Return: 1 if a string is a palindrome, otherwise, 0.
+ * power - returns the exponential value of a number
+ * @base: base number
+ * @exponent: exponent number
+ * Return: result
  */
-int assert(char *s, char *e, int len)
+unsigned long power(unsigned long base, unsigned int exponent)
 {
-	if (length(s) == len / 2)
+	int count, result;
+
+	if (exponent == 0)
 		return (1);
-	if (*s == *e)
-		return (assert(++s, --e, len));
-	else
-		return (0);
+	result = 1;
+	for (count = 0; count < (int)exponent; count++)
+	{
+		result *= base;
+	}
+	return (result);
+}
+
+/**
+ * digit_at - gets a digit at a specific position from an unsigned int
+ * @n: number
+ * @pos: position
+ *
+ * Return: digit at given position.
+ */
+int digit_at(unsigned long n, int pos)
+{
+	while (n >= power(10, pos))
+		n /= 10;
+
+	return n % 10;
 }
 
 /**
@@ -38,9 +68,12 @@ int assert(char *s, char *e, int len)
  * @s: provided string
  * Return: length of the string.
  */
-int length(char *s)
-{
-	if (!*s)
-		return (0);
-	return (1 + length(++s));
+int length(unsigned long n)
+{	
+	int i = 1;
+
+	for (i = 1; n > 9; i++)
+		n = n / 10;
+
+	return (i);
 }
