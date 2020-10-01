@@ -15,10 +15,8 @@ int check_cycle(listint_t *head)
 	if (!head || !head->next)
 		return (0);
 
-	if (head->next == head)
-		return (1);
-
-	slow = fast = head;
+	slow = head;
+	fast = head->next;
 
 	while (slow != fast) {
 		slow = slow->next;
