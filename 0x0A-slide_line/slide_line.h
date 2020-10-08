@@ -4,4 +4,4 @@
 #define SLIDE_RIGHT 0
 
 int slide_line(int *line, size_t size, int direction);
-#endif /* ifndef SLIDE
+#endif /* ifndef SLIDE */
